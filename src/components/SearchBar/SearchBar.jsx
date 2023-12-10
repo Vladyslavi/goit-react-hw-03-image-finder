@@ -14,16 +14,22 @@ class SearchBar extends Component {
         searchName: '',
         inputValue: '',
     };
-    handleChange = event => {
+
+    handleChange = (event) => {
         this.setState({ inputValue: event.target.value });
     };
 
-    handleSubmit = event => {
+    handleSubmit = (event) => {
         event.preventDefault();
-        const searchQuery = event.target.elements.searchName.value.trim();
-        this.props.onSubmit(searchQuery);
-        event.target.reset();
+        const searchQuery = this.state.inputValue.trim();
+
+        if (searchQuery !== '') {
+            this.props.onSubmit(searchQuery);
+            this.setState({ inputValue: '' });
+        }
     };
+
+
     render() {
         return (
             <header>
